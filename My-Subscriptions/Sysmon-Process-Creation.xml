@@ -17,9 +17,14 @@
   <Query><![CDATA[
     <QueryList>
     <Query Id="0" Path="Microsoft-Windows-Sysmon/Operational">
-      <Select Path="Microsoft-Windows-Sysmon/Operational">*</Select>
+      <Select Path="Microsoft-Windows-Sysmon/Operational">
+      *[System[EventID='1']] and
+      *[EventData[Data[@Name='ParentImage'] != 'C:\Windows\System32\eventvwr.exe']] and
+      *[EventData[Data[@Name='Image'] != 'C:\Program Files\Git\mingw64\bin\git.exe']]
+      </Select>
     </Query>
-  </QueryList>]]></Query>
+    </QueryList>
+  ]]></Query>
   <ReadExistingEvents>true</ReadExistingEvents>
   <TransportName>http</TransportName>
   <ContentFormat>RenderedText</ContentFormat>
